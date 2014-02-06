@@ -1,17 +1,20 @@
+Fig: Haskell-Style Config Parsing
+===
+
 This package is designed to allow you to create configuration files
 with declarative Haskell and parse the values back into Haskell code.
 The benefit here is to have a configuration file in Haskell that does
 not have to be recompiled - it is interpreted/parsed at runtime in a 
 type-safe manner.
 
-Example usage:
-
 ```haskell
--- /path/to/my-config.hs
+-- Example configuration "my-config"
 foo = ["bar", "baz"]
 spam = Eggs
+```
 
--- Application source
+```haskell
+-- Example application
 import Fig
 
 import Data.Maybe
@@ -23,7 +26,7 @@ getSpam :: FigMap -> Spam
 getSpam = fromMaybe SomethingEntirelyDifferent . readFig "spam"
 
 main = do
-    fig <- pickFig "my-config.hs"
+    fig <- pickFig "/path/to/my-config"
     let spam = getSpam fig
     print spam
     let foo = getFoo fig
