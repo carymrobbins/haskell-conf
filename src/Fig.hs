@@ -1,25 +1,12 @@
 module Fig where
 
 import Control.Monad
-import Language.Haskell.Parser
-import Language.Haskell.Pretty
-import Language.Haskell.Syntax
+import Text.Read
+import Fig.Parser
 
+readFig :: Read a => String -> FigMap -> Maybe a
+readFig key fig = lookup key fig >>= readMaybe
 
-getModule :: ParseResult HsModule -> HsModule
-getModule (ParseOk x) = x
-
-getDecl :: HsModule -> [HsDecl]
-getDecl (HsModule _ _ _ _ ds) = ds
-
-getPair (HsPatBind _ (HsPVar (HsIdent name)) (HsUnGuardedRhs value) _) =
-    (name, value)
-
-getFig = getDecl . getModule . parseModule
-
-final = liftM (map (fmap prettyPrint . getPair) . getFig)
-            $ readFile "src/example.hs"
-
-display = liftM (unlines . map (\(k, v) -> k ++ " = " ++ v)) final
-            >>= putStrLn
+pickFig :: String -> IO [(String, String)]
+pickFig = liftM parseFig . readFile
 
