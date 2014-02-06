@@ -25,11 +25,14 @@ data Spam = Eggs | Parrot | SomethingEntirelyDifferent
 getSpam :: FigMap -> Spam
 getSpam = fromMaybe SomethingEntirelyDifferent . readFig "spam"
 
+getFoo :: FigMap -> Maybe [Int]
+getFoo = readFig "foo"
+
 main = do
     fig <- pickFig "/path/to/my-config"
     let spam = getSpam fig
-    print spam
+    print spam  -- Output: "Eggs"
     let foo = getFoo fig
-    print foo
+    print foo   -- Output: "Nothing"
 ```
 
