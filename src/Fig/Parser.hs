@@ -1,4 +1,4 @@
-module Fig.Parser where
+module Fig.Parser (FigMap, parseFig) where
 
 import Language.Haskell.Parser
 import Language.Haskell.Pretty

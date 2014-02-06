@@ -1,4 +1,4 @@
-module Fig where
+module Fig (FigMap, pickFig, readFig) where
 
 import Control.Monad
 import Text.Read
