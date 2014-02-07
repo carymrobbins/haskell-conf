@@ -1,4 +1,4 @@
-Fig: Haskell-Style Config Parsing
+Conf: Haskell-Style Config Parsing
 ===
 
 This package is designed to allow you to create configuration files
@@ -15,24 +15,23 @@ spam = Eggs
 
 ```haskell
 -- Example application
-import Fig
-
+import Data.Conf
 import Data.Maybe
 
 data Spam = Eggs | Parrot | SomethingEntirelyDifferent
     deriving (Show, Read)
 
-getSpam :: FigMap -> Spam
-getSpam = fromMaybe SomethingEntirelyDifferent . readFig "spam"
+getSpam :: Conf -> Spam
+getSpam = fromMaybe SomethingEntirelyDifferent . getConf "spam"
 
-getFoo :: FigMap -> Maybe [Int]
-getFoo = readFig "foo"
+getFoo :: Conf -> Maybe [Int]
+getFoo = getConf "foo"
 
 main = do
-    fig <- pickFig "/path/to/my-config"
-    let spam = getSpam fig
+    conf <- readConf "/path/to/my-config"
+    let spam = getSpam conf
     print spam  -- Output: "Eggs"
-    let foo = getFoo fig
+    let foo = getFoo conf
     print foo   -- Output: "Nothing"
 ```
 

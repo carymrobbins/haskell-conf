@@ -1,10 +1,10 @@
-module Fig.Parser (FigMap, parseFig) where
+module Data.Conf.Parser (Conf, parseConf) where
 
 import Language.Haskell.Parser
 import Language.Haskell.Pretty
 import Language.Haskell.Syntax
 
-type FigMap = [(String, String)]
+type Conf = [(String, String)]
 
 getModule :: ParseResult HsModule -> HsModule
 getModule (ParseOk x) = x
@@ -16,9 +16,9 @@ getPair :: HsDecl -> (String, HsExp)
 getPair (HsPatBind _ (HsPVar (HsIdent name)) (HsUnGuardedRhs value) _) =
     (name, value)
 
-getFig :: String -> [HsDecl]
-getFig = getDecl . getModule . parseModule
+parseDecls :: String -> [HsDecl]
+parseDecls = getDecl . getModule . parseModule
 
-parseFig :: String -> FigMap
-parseFig = map (fmap prettyPrint . getPair) . getFig
+parseConf :: String -> Conf
+parseConf = map (fmap prettyPrint . getPair) . parseDecls
 
