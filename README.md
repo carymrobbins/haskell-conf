@@ -1,5 +1,12 @@
-Conf: Haskell-Style Config Parsing
-===
+Conf: Parser for Haskell-based configuration files.
+===========
+
+Installation
+-----------
+You can install this library from Hackage via `cabal install conf`
+
+Description
+-----------
 
 This package is designed to allow you to create configuration files
 with declarative Haskell and parse the values back into Haskell code.
@@ -7,14 +14,16 @@ The benefit here is to have a configuration file in Haskell that does
 not have to be recompiled - it is interpreted/parsed at runtime in a 
 type-safe manner.
 
+Example usage:
+
 ```haskell
--- Example configuration "my-config"
+-- /path/to/my-config.hs
 foo = ["bar", "baz"]
 spam = Eggs
 ```
 
 ```haskell
--- Example application
+-- Application source
 import Data.Conf
 import Data.Maybe
 
@@ -24,14 +33,15 @@ data Spam = Eggs | Parrot | SomethingEntirelyDifferent
 getSpam :: Conf -> Spam
 getSpam = fromMaybe SomethingEntirelyDifferent . getConf "spam"
 
-getFoo :: Conf -> Maybe [Int]
+getFoo :: Conf -> Maybe Foo
 getFoo = getConf "foo"
 
 main = do
-    conf <- readConf "/path/to/my-config"
+    conf <- readConf "my-config.hs"
     let spam = getSpam conf
-    print spam  -- Output: "Eggs"
+    print spam
     let foo = getFoo conf
-    print foo   -- Output: "Nothing"
+    print foo
 ```
+
 
