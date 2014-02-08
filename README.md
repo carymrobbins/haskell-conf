@@ -33,15 +33,13 @@ data Spam = Eggs | Parrot | SomethingEntirelyDifferent
 getSpam :: Conf -> Spam
 getSpam = fromMaybe SomethingEntirelyDifferent . getConf "spam"
 
-getFoo :: Conf -> Maybe Foo
+getFoo :: Conf -> Maybe Int
 getFoo = getConf "foo"
 
 main = do
     conf <- readConf "my-config.hs"
-    let spam = getSpam conf
-    print spam
-    let foo = getFoo conf
-    print foo
+    print $ getSpam conf -- Output: Spam
+    print $ getFoo conf  -- Output: Nothing
 ```
 
 
