@@ -1,4 +1,4 @@
-module Data.Conf (Conf, readConf, getConf) where
+module Data.Conf (Conf, readConf, getConf, parseConf) where
 
 import Control.Monad
 import Text.Read

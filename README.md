@@ -38,8 +38,23 @@ getFoo = getConf "foo"
 
 main = do
     conf <- readConf "my-config.hs"
-    print $ getSpam conf -- Output: Spam
+    print $ getSpam conf -- Output: Eggs
     print $ getFoo conf  -- Output: Nothing
 ```
 
+Building
+--------
+```bash
+cabal sandbox init  # If you haven't already
+cabal install --dependencies-only
+cabal build
+```
+
+Running the Tests
+-----------------
+```bash
+cabal sandbox init  # If you haven't already
+cabal install --enable-tests --dependencies-only
+cabal test
+```
 

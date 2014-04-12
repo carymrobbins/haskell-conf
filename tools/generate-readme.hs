@@ -22,7 +22,23 @@ header synopsis = unlines
     , "-----------"
     ]
 
-footer = ""
+footer = unlines
+    [ "Building"
+    , "--------"
+    , "```bash"
+    , "cabal sandbox init  # If you haven't already"
+    , "cabal install --dependencies-only"
+    , "cabal build"
+    , "```"
+    , ""
+    , "Running the Tests"
+    , "-----------------"
+    , "```bash"
+    , "cabal sandbox init  # If you haven't already"
+    , "cabal install --enable-tests --dependencies-only"
+    , "cabal test"
+    , "```"
+    ]
 
 main = do
     args <- getArgs

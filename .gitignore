@@ -1,2 +1,4 @@
 dist/
 *.swap
+.cabal-sandbox
+cabal.sandbox.config

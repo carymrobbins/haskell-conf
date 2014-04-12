@@ -37,7 +37,7 @@ description:
     >
     > main = do
     >     conf <- readConf "my-config.hs"
-    >     print $ getSpam conf -- Output: Spam
+    >     print $ getSpam conf -- Output: Eggs
     >     print $ getFoo conf  -- Output: Nothing
 
 extra-source-files:
@@ -54,11 +54,22 @@ source-repository head
 library
   exposed-modules:     Data.Conf
                      , Data.Conf.Parser
-  -- other-modules:       
-  -- other-extensions:    
-  build-depends:       base >=4.6 && <4.7
-                     , haskell-src
   hs-source-dirs:      src
   default-language:    Haskell2010
   ghc-options:         -Wall
+  build-depends:       base >=4.6 && <4.7
+                     , haskell-src
+
+Test-Suite unit-test
+  type:                exitcode-stdio-1.0
+  main-is:             UnitTests.hs
+  hs-source-dirs:      tests
+  default-language:    Haskell2010
+  build-depends:       conf
+                     , base >=4.6 && <4.7
+                     , HUnit
+                     , test-framework
+                     , test-framework-hunit
+                     , test-framework-th
+  other-extensions:    TemplateHaskell
 
