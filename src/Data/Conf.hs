@@ -9,4 +9,3 @@ getConf key conf = lookup key conf >>= readMaybe
 
 readConf :: String -> IO [(String, String)]
 readConf = liftM parseConf . readFile
-

@@ -29,4 +29,3 @@ case_example_usage = do
     getFoo conf @=? Nothing
 
 main = $(defaultMainGenerator)
-

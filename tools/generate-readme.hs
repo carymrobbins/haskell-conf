@@ -27,7 +27,7 @@ footer = unlines
     , "--------"
     , "```bash"
     , "cabal sandbox init  # If you haven't already"
-    , "cabal install --dependencies-only"
+    , "cabal install -j --dependencies-only"
     , "cabal build"
     , "```"
     , ""
@@ -35,7 +35,7 @@ footer = unlines
     , "-----------------"
     , "```bash"
     , "cabal sandbox init  # If you haven't already"
-    , "cabal install --enable-tests --dependencies-only"
+    , "cabal install -j --enable-tests --dependencies-only"
     , "cabal test"
     , "```"
     ]
@@ -94,4 +94,3 @@ applyCodeBlocks xs
 
 isCode :: [String] -> Bool
 isCode xs = (take 1 xs >>= take 1) == ">"
-

@@ -1,24 +1,26 @@
 module Data.Conf.Parser (Conf, parseConf) where
 
+import Data.Maybe
+
 import Language.Haskell.Parser
 import Language.Haskell.Pretty
 import Language.Haskell.Syntax
 
 type Conf = [(String, String)]
 
-getModule :: ParseResult HsModule -> HsModule
-getModule (ParseOk x) = x
+getModule :: ParseResult HsModule -> Maybe HsModule
+getModule (ParseOk x) = Just x
+getModule _ = Nothing
 
-getDecl :: HsModule -> [HsDecl]
-getDecl (HsModule _ _ _ _ ds) = ds
+getDecls :: HsModule -> [HsDecl]
+getDecls (HsModule _ _ _ _ ds) = ds
 
-getPair :: HsDecl -> (String, HsExp)
-getPair (HsPatBind _ (HsPVar (HsIdent name)) (HsUnGuardedRhs value) _) =
-    (name, value)
+getPair :: HsDecl -> Maybe (String, HsExp)
+getPair (HsPatBind _ (HsPVar (HsIdent name)) (HsUnGuardedRhs value) _) = Just (name, value)
+getPair _ = Nothing
 
 parseDecls :: String -> [HsDecl]
-parseDecls = getDecl . getModule . parseModule
+parseDecls s = maybe [] getDecls $ getModule $ parseModule s
 
 parseConf :: String -> Conf
-parseConf = map (fmap prettyPrint . getPair) . parseDecls
-
+parseConf s = map (fmap prettyPrint) $ mapMaybe getPair $ parseDecls s

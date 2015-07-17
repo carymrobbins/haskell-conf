@@ -11,7 +11,7 @@ Description
 This package is designed to allow you to create configuration files
 with declarative Haskell and parse the values back into Haskell code.
 The benefit here is to have a configuration file in Haskell that does
-not have to be recompiled - it is interpreted/parsed at runtime in a 
+not have to be recompiled - it is interpreted/parsed at runtime in a
 type-safe manner.
 
 Example usage:
@@ -46,7 +46,7 @@ Building
 --------
 ```bash
 cabal sandbox init  # If you haven't already
-cabal install --dependencies-only
+cabal install -j --dependencies-only
 cabal build
 ```
 
@@ -54,7 +54,7 @@ Running the Tests
 -----------------
 ```bash
 cabal sandbox init  # If you haven't already
-cabal install --enable-tests --dependencies-only
+cabal install -j --enable-tests --dependencies-only
 cabal test
 ```
 

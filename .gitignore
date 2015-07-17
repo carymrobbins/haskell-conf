@@ -2,3 +2,6 @@ dist/
 *.swap
 .cabal-sandbox
 cabal.sandbox.config
+out/
+.idea/
+*.iml
